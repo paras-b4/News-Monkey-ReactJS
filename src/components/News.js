@@ -138,7 +138,12 @@ export class News extends Component {
       }
  async updateNews(){
   let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apikey}&page=${this.state.page}&pageSize=${this.props.pageSize}`
-  let response = await fetch(url)
+  let response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
   let data= await response.json()
   console.log(data)
   this.setState({article:data.articles ,totalpages:data.totalResults})
@@ -188,7 +193,12 @@ export class News extends Component {
   fetchData=async ()=>{
     this.setState({page:this.state.page+1})
     let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apikey}&page=${this.state.page}&pageSize=${this.props.pageSize}`
-    let response = await fetch(url)
+    let response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
     let data= await response.json()
     console.log(data)
     this.setState({article:this.state.article.concat(data.articles) ,totalpages:data.totalResults})
